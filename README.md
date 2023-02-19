@@ -1,4 +1,6 @@
 # MongoDB Connector for STAS (Smart Test Automation Studio)
+STAS Project Link: https://github.com/mkrishna4u/smart-testauto-framework
+
 This is a MongoDB connector for performing CRUD (Create, Read, Update, Delete) operations on MongoDB database. Include the following maven dependency into STAS project **pom.xml** file.
 
 
