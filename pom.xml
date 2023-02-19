@@ -5,13 +5,14 @@
   <version>6.0.8</version>
   <name>Mongo DB connector for Smart Test Automation Framework (STAF / STAS)</name>
   <description>Mongo DB connector for Smart Test Automation Framework (STAF / STAS)</description>
+  <url>https://github.com/mkrishna4u/smart-testauto-mongodb-connector</url>
   
   <developers>
 		<developer>
 			<id>1</id>
 			<name>Madhav Krishna</name>
 			<email>mkrishnacs20@gmail.com</email>
-			<url>https://github.com/mkrishna4u/smart-testauto-mongod-connector</url>
+			<url>https://github.com/mkrishna4u/smart-testauto-mongodb-connector</url>
 			<organization>UITNet</organization>
 			<organizationUrl>http://uitnet.org</organizationUrl>
 		</developer>
@@ -25,9 +26,9 @@
 	</licenses>
 
 	<scm>
-		<connection>scm:git:git://github.com/mkrishna4u/smart-testauto-mongod-connector.git</connection>
-		<developerConnection>scm:git:git://github.com/mkrishna4u/smart-testauto-mongod-connector.git</developerConnection>
-		<url>https://github.com/mkrishna4u/smart-testauto-mongod-connector/tree/main</url>
+		<connection>scm:git:git://github.com/mkrishna4u/smart-testauto-mongodb-connector.git</connection>
+		<developerConnection>scm:git:git://github.com/mkrishna4u/smart-testauto-mongodb-connector.git</developerConnection>
+		<url>https://github.com/mkrishna4u/smart-testauto-mongodb-connector/tree/main</url>
 	</scm>
 	
 	<properties>
