@@ -13,13 +13,13 @@ additionalProps:
   # Note: at a time only one option is allowed.
   
   # For Auth Mechanism: 0- No Auth => Uncomment below lines
-  auth.mechanism: 0
+  #auth.mechanism: 0
   
   # For Auth Mechanism: 1- Basic(SCRAM-SHA-256) => Uncomment below lines
-  #auth.mechanism: 1
-  #auth.mechanism.1.databaseName: <authentication-database-name>
-  #auth.mechanism.1.userName: <username>
-  #auth.mechanism.1.password: <password>
+  auth.mechanism: 1
+  auth.mechanism.1.databaseName: <authentication-database-name>
+  auth.mechanism.1.userName: <username>
+  auth.mechanism.1.password: <password>
   
   # For Auth Mechanism: 2- Legacy(SCRAM-SHA-1) => Uncomment below lines
   #auth.mechanism: 2
