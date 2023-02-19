@@ -13,13 +13,13 @@ This is a MongoDB connector for performing CRUD (Create, Read, Update, Delete) o
 ## How to use MongoDB connector into STAS project?
 Once you will add maven dependency into your STAS project. Follow the following steps to use it:
 	
-1. Take the **sample-db.yaml** database configuration file from the link given below and copy into your project directory **"test-config/apps-config/<app-name>/database-profiles/"**
+1. Take the **sample-db.yaml** database configuration file from the link given below and copy into your project directory **"test-config/apps-config/&lt;app-name&gt;/database-profiles/"**
 
 [https://github.com/mkrishna4u/smart-testauto-framework/tree/main/src/main/resources](https://github.com/mkrishna4u/smart-testauto-framework/tree/main/src/main/resources "STAS Tool - MongoDB Sample Database Profile") 
 
 2. You can change the file name as per your database profile name like **admin-db.yaml** and also within the file contents update the **profileName:** property to specify database profile name like **admin-db**.
 
-3. Update **dbProfileNames:** property in **"test-config/apps-config/<app-name>/AppConfig.yaml"** file of your project to include this **admin-db** into it like given below:
+3. Update **dbProfileNames:** property in **"test-config/apps-config/&lt;app-name&gt;/AppConfig.yaml"** file of your project to include this **admin-db** into it like given below:
 
 	dbProfileNames: [admin-db]
 	
@@ -34,7 +34,7 @@ Here is the sample code (Sample Usecases) to perform CRUD operations on MongoDB 
 
 [https://www.mongodb.com/docs/manual/reference/command/](https://www.mongodb.com/docs/manual/reference/command/ "MongoDB Commands Reference") 
 
-**A. Read operation on MongoDb entity / collection: **
+**A. Read operation on MongoDb entity / collection:**
 
 	Scenario: Verify find query on MongoDB to retrieve the data and verify retrieved data.
       When get "Customer" entity data as JSON document using query below and store into "JSON_RESP_VAR" variable. Target DB Info [AppName="MyApp", DatabaseProfileName="sample-db-mongo"]:
@@ -50,7 +50,7 @@ Here is the sample code (Sample Usecases) to perform CRUD operations on MongoDB 
       | Parameter/JSON Path                                             | Operator | Expected Information           |
       | {path: "$.cursor.firstBatch[*].age", valueType: "integer-list"} | >        | {ev: 45, valueType: "integer"} |
 	
-**B. Update operation on MongoDb entity / collection: **
+**B. Update operation on MongoDb entity / collection:**
 
 	Scenario: Perform update operation on MongoDB entity/collection.
       When update "customer" entity data using query below. Target DB Info [AppName="MyApp", DatabaseProfileName="sample-db-mongo"]:
@@ -66,7 +66,7 @@ Here is the sample code (Sample Usecases) to perform CRUD operations on MongoDB 
       }
       """
 
-**C. Delete operation from MongoDB entity / collection: **
+**C. Delete operation from MongoDB entity / collection:**
 
 	Scenario: Perform delete operation on MongoDB entity/collection.
       When delete "customer" entity data using query below. Target DB Info [AppName="MyApp", DatabaseProfileName="sample-db-mongo"]:
@@ -82,7 +82,7 @@ Here is the sample code (Sample Usecases) to perform CRUD operations on MongoDB 
       }
       """
 
-**D. Insert/Create operation in MongoDb entity / collection: **
+**D. Insert/Create operation in MongoDb entity / collection:**
 
 	Scenario: Perform insert operation on MongoDB entity/collection.
       When insert new data into "customer" entity using query below. Target DB Info [AppName="MyApp", DatabaseProfileName="sample-db-mongo"]:
