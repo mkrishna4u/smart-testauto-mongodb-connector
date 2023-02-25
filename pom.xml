@@ -32,7 +32,7 @@
 	</scm>
 	
 	<properties>
-		<smart-testauto-framework.version>6.0.8</smart-testauto-framework.version>
+		<smart-testauto-framework.version>6.0.9</smart-testauto-framework.version>
 		<mongo-java-driver.version>3.12.12</mongo-java-driver.version>
 		<maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
 		<maven.compiler.source>11</maven.compiler.source>
