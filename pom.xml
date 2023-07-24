@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.uitnet.testing.smartfwk</groupId>
 	<artifactId>smart-testauto-mongodb-connector</artifactId>
-	<version>6.0.13</version>
+	<version>6.1.0</version>
 	<name>Mongo DB connector for Smart Test Automation Framework (STAF / STAS)</name>
 	<description>Mongo DB connector for Smart Test Automation Framework (STAF / STAS)</description>
 	<url>https://github.com/mkrishna4u/smart-testauto-mongodb-connector</url>
@@ -32,7 +32,7 @@
 	</scm>
 
 	<properties>
-		<smart-testauto-framework.version>6.0.13</smart-testauto-framework.version>
+		<smart-testauto-framework.version>6.1.0</smart-testauto-framework.version>
 		<mongo-java-driver.version>3.12.13</mongo-java-driver.version>
 
 		<maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
