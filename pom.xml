@@ -46,22 +46,6 @@
 
 		<maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>Maven-central</id>
-			<name>Maven central</name>
-			<url>https://repo1.maven.org/maven2</url>
-		</repository>
-	</repositories>
-
-	<pluginRepositories>
-		<pluginRepository>
-			<id>Maven-central</id>
-			<name>Maven central</name>
-			<url>https://repo1.maven.org/maven2</url>
-		</pluginRepository>
-	</pluginRepositories>
 	
 	<distributionManagement>
 		<snapshotRepository>
