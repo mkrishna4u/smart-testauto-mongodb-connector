@@ -10,7 +10,7 @@ This is a MongoDB connector for performing CRUD (Create, Read, Update, Delete) o
 	    <version>${smart-testauto-mongodb-connector.version}</version>
 	</dependency>
 	
-**Note:** Update **${smart-testauto-mongodb-connector.version}** string with the specific version like **6.0.8**. You can find more details about it on Maven Central or Github Releases under the artifact **smart-testauto-mongodb-connector**.
+**Note:** Update **${smart-testauto-mongodb-connector.version}** string with the specific version like **6.1.2**. You can find more details about it on Maven Central or Github Releases under the artifact **smart-testauto-mongodb-connector**.
 	
 ## How to use MongoDB connector into STAS project?
 Once you will add maven dependency into your STAS project. Follow the following steps to use it:
@@ -109,4 +109,4 @@ Here is the sample code (Sample Usecases) to perform CRUD operations on MongoDB 
 
 
 # License
-Apache License, 2.0
+Apache License, 2.0; Copyright &copy; Madhav Krishna & Contributors
