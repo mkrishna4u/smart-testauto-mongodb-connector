@@ -71,7 +71,7 @@
 				<exclusion>
 					<groupId>org.slf4j</groupId>
 					<artifactId>slf4j-nop</artifactId>
-				</exclusion>
+				</exclusion>				
 			</exclusions>
 		</dependency>
 
