@@ -17,7 +17,6 @@
  */
 package org.uitnet.testing.smartfwk.database;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
@@ -26,21 +25,19 @@ import org.testng.Assert;
 import org.uitnet.testing.smartfwk.common.MethodArg;
 import org.uitnet.testing.smartfwk.common.ReturnType;
 import org.uitnet.testing.smartfwk.ui.core.config.DatabaseProfile;
-import org.uitnet.testing.smartfwk.ui.core.utils.ObjectUtil;
-import org.uitnet.testing.smartfwk.ui.core.utils.StringUtil;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.MongoClientOptions.Builder;
-import com.mongodb.MongoCredential;
-import com.mongodb.ServerAddress;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoClientSettings.Builder;
 import com.mongodb.client.ClientSession;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
 /**
  * Mongo database action handler also called the MongoDatabaseActionHandler.
- * Used to perform CRUD(Create, Read, Update and Delete) operations on MongoDB database
- * entities / collections.
+ * Used to perform CRUD(Create, Read, Update and Delete) operations on MongoDB
+ * database entities / collections.
  * 
  * @author Madhav Krishna
  *
@@ -56,93 +53,25 @@ public class MongoDatabaseActionHandler extends AbstractDatabaseActionHandler {
 	@Override
 	public DatabaseConnection connect(DatabaseProfile dbProfile) {
 		Map<String, Object> dbAdditionalProps = dbProfile.getAdditionalProps();
-		databaseName = (String) dbAdditionalProps.get("databaseName");
 
-		MongoCredential auth = prepareMongoCredentials(dbAdditionalProps);
+		MongoClientSettings settings = prepareConnectionSettings(dbProfile, dbAdditionalProps);
 
-		ServerAddress serverAddress = new ServerAddress((String) dbAdditionalProps.get("hostNameOrIpAddress"),
-				(Integer) dbAdditionalProps.get("port"));
-
-		MongoClientOptions options = prepareOptions(dbProfile, dbAdditionalProps);
-		MongoClient client = null;
-		if(auth == null) {
-			client = new MongoClient(serverAddress, options);
-		} else {
-			client = new MongoClient(serverAddress, auth, options);
-		}
+		MongoClient client = MongoClients.create(settings);
+		;
 
 		DatabaseConnection connection = new DatabaseConnection(client);
 		return connection;
 	}
-	
-	protected MongoCredential prepareMongoCredentials(Map<String, Object> dbAdditionalProps) {
-		String authMechanism = "" + dbAdditionalProps.get("auth.mechanism");
-		MongoCredential auth = null;
-		switch (authMechanism) {
-		case "1": { // Basic(SCRAM-SHA-256)
-			auth = MongoCredential.createScramSha256Credential((String) dbAdditionalProps.get("auth.mechanism.1.userName"),
-					(String) dbAdditionalProps.get("auth.mechanism.1.databaseName"),
-					((String) dbAdditionalProps.get("auth.mechanism.1.password")).toCharArray());
-			break;
-		}
-		case "2": { //Legacy(SCRAM-SHA-1)
-			auth = MongoCredential.createScramSha1Credential((String) dbAdditionalProps.get("auth.mechanism.2.userName"),
-					(String) dbAdditionalProps.get("auth.mechanism.2.databaseName"),
-					((String) dbAdditionalProps.get("auth.mechanism.2.password")).toCharArray());
-			break;
-		}
-		case "3": { //X.509
-			String userName = (String) dbAdditionalProps.get("auth.mechanism.3.userName");
-			if(StringUtil.isEmptyAfterTrim(userName)) {
-				auth = MongoCredential.createMongoX509Credential();
-			} else {
-				auth = MongoCredential.createMongoX509Credential(userName);
-			}
-			break;
-		}
-		case "4": { //Kerberos(GSSAPI)
-			String userName = (String) dbAdditionalProps.get("auth.mechanism.4.userName");
-			if(StringUtil.isEmptyAfterTrim(userName)) {
-				auth = MongoCredential.createGSSAPICredential("");
-			} else {
-				auth = MongoCredential.createGSSAPICredential(userName);
-			}
-			break;
-		}
-		case "5": { //LDAP (PLAIN)
-			auth = MongoCredential.createPlainCredential((String) dbAdditionalProps.get("auth.mechanism.5.userName"),
-					(String) dbAdditionalProps.get("auth.mechanism.5.databaseName"),
-					((String) dbAdditionalProps.get("auth.mechanism.5.password")).toCharArray());
-			break;
-		}
-		default: {
-			auth = null;
-			break;
-		}
-		}
-			
 
-		return auth;
-	}
-	
-	@SuppressWarnings("unchecked")
-	protected MongoClientOptions prepareOptions(DatabaseProfile dbProfile, Map<String, Object> dbAdditionalProps) {
-		Map<String, Object> options = (Map<String, Object>)dbAdditionalProps.get("options");
-		Builder builder = MongoClientOptions.builder();
-		if(options != null) {
-			Method m = null;
-			
-			try {
-				for(Map.Entry<String, Object> entry : options.entrySet()) {
-					m = ObjectUtil.findClassMethod(Builder.class, entry.getKey(), 1);
-					m.invoke(builder, entry.getValue());
-				}
-			} catch(Exception ex) {
-				Assert.fail("Failed to set '' property with '' value into mongo client driver.", ex);
-			}
-		}
-		
-		MongoClientOptions moptions = builder.build();
+	protected MongoClientSettings prepareConnectionSettings(DatabaseProfile dbProfile,
+			Map<String, Object> dbAdditionalProps) {
+		databaseName = (String) dbAdditionalProps.get("databaseName");
+		String connectionString = (String) dbAdditionalProps.get("connectionString");
+
+		Builder builder = MongoClientSettings.builder();
+		builder.applyConnectionString(new ConnectionString(connectionString));
+
+		MongoClientSettings moptions = builder.build();
 
 		return moptions;
 	}
@@ -153,7 +82,6 @@ public class MongoDatabaseActionHandler extends AbstractDatabaseActionHandler {
 		if (client != null) {
 			client.close();
 		}
-
 	}
 
 	protected String runCommand(DatabaseConnection connection, String jsonCommand, boolean shouldCommit) {
@@ -167,8 +95,8 @@ public class MongoDatabaseActionHandler extends AbstractDatabaseActionHandler {
 			Document command = Document.parse(jsonCommand);
 
 			session = client.startSession();
-			
-			if(shouldCommit) {
+
+			if (shouldCommit) {
 				session.startTransaction();
 			}
 
