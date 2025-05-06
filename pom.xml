@@ -46,7 +46,8 @@
 		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
 		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
-		<maven-gpg-plugin.version>3.4.7</maven-gpg-plugin.version>
+		<nexus-staging-maven-plugin.version>1.7.0</nexus-staging-maven-plugin.version>
+		<maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
 
 		<maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
 	</properties>
@@ -135,6 +136,16 @@
 					<skip>false</skip>
 				</configuration>
 			</plugin>
+			<plugin>
+	          <groupId>org.sonatype.central</groupId>
+	          <artifactId>central-publishing-maven-plugin</artifactId>
+	          <version>0.7.0</version>
+	          <extensions>true</extensions>
+	          <configuration>
+	            <publishingServerId>central</publishingServerId>
+	            <autoPublish>false</autoPublish>
+	          </configuration>
+	        </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
